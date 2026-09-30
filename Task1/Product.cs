@@ -11,7 +11,7 @@ namespace Task1
     {
         public int ID { get; set; }
         public  string ProductCode { get; set; }
-        public string Name { get;  }
+        public string Name { get; set; }
         public string? Description;
         public decimal? Price;
         public int? Quantitiy;
