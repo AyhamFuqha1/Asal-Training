@@ -1,0 +1,11 @@
+ProductCode,Name,Description,Price,Quantity
+ARC001,Shampoo,Hair shampoo 500ml,12.5,5
+ARC001,Soap,Hand soap,3.75,20
+ARC003,,Mint toothpaste,4.25,15
+ARC004,Perfume,Men perfume 100ml,0,8
+ARC005,Body Lotion,Moisturizing body lotion,20,-5
+ARC006,Face Wash,Gentle face cleanser,7.5,10
+ARC007,Hair Gel,Strong hold hair gel,6.25,18
+ARC008,Deodorant,Fresh spray deodorant,5.75,25
+ARC009,Conditioner,Hair conditioner 400ml,11,7
+ARC010,Hand Cream,Moisturizing hand cream,4.99,14

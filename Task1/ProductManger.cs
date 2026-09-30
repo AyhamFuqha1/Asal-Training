@@ -52,6 +52,10 @@ namespace Task1
 
         public Boolean CheckCode(string ProductCode ,out string message)
         {
+            if(ProductCode.Length == 0)
+            {
+                message = "ProductCode is Reqired";
+            }
             foreach (Product product in products)
             {
                 if (product.ProductCode == ProductCode)

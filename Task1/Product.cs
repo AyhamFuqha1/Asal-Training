@@ -33,6 +33,7 @@ namespace Task1
                 message="Name is requird";
                 return false;
             }
+            this.Name = name;
             message = "Name is Valid";
             return true;
         }
