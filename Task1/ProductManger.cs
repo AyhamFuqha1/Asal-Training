@@ -9,13 +9,13 @@ namespace Task1
 {
     internal class ProductManger
     {
-        private List<Product> products;
-        private int id;
-        private Product newProduct;
+        private List<Product> Products;
+        private int ID;
+        private Product NewProduct;
         public ProductManger()
         {
-            products = new List<Product>();
-            id = 0;
+            Products = new List<Product>();
+            ID = 0;
         }
         public string addProduct(string ProductCode, string name, string Description, decimal Price, int Quantity)
         {
@@ -24,29 +24,29 @@ namespace Task1
             {
                 return ProductMessage;
             }
-            newProduct = new Product(id, ProductCode);
+            NewProduct = new Product(ID, ProductCode);
 
-            if (!newProduct.setName(name, out string NameMessage))
+            if (!NewProduct.SetName(name, out string NameMessage))
             {
                 return NameMessage;
             }
 
-            if (!newProduct.setDescription(Description, out string DescrptionMessage))
+            if (!NewProduct.SetDescription(Description, out string DescrptionMessage))
             {
                 return DescrptionMessage;
             }
 
-            if (!newProduct.setPrice(Price, out string priceMessage))
+            if (!NewProduct.SetPrice(Price, out string priceMessage))
             {
                 return priceMessage;
             }
 
-            if (!newProduct.setQuantity(Quantity, out string quantityMessage))
+            if (!NewProduct.SetQuantity(Quantity, out string quantityMessage))
             {
                 return quantityMessage;
             }
-            id++;
-            products.Add(newProduct);
+            ID++;
+            Products.Add(NewProduct);
             return "Product added successfully.";
         }
 
@@ -56,7 +56,7 @@ namespace Task1
             {
                 message = "ProductCode is Reqired";
             }
-            foreach (Product product in products)
+            foreach (Product product in Products)
             {
                 if (product.ProductCode == ProductCode)
                 {
@@ -64,7 +64,7 @@ namespace Task1
                     return false;
                 }
             }
-            message = "product is valid";
+            message = "product is valProducts";
             return true;
         }
 
@@ -72,16 +72,16 @@ namespace Task1
         //-----------------------EEROR-------------------//
         private string ERROR(string error)
         {
-            return "Value in " + error + " not valid";
+            return "Value in " + error + " not valProducts";
         }
 
         public void ShowProducts()
         {
             Console.WriteLine("--------------------------------------------------------------------------------");
-            Console.WriteLine($"{"ID",-5} {"Code",-12} {"Name",-20} {"Description",-20} {"Price",-10} {"Qty",-5}");
+            Console.WriteLine($"{"Products",-5} {"Code",-12} {"Name",-20} {"Description",-20} {"Price",-10} {"Qty",-5}");
             Console.WriteLine("--------------------------------------------------------------------------------");
 
-            foreach (Product product in products)
+            foreach (Product product in Products)
             {
                 Console.WriteLine(
                     $"{product.ID,-5} " +

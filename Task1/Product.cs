@@ -26,7 +26,7 @@ namespace Task1
           
         }
 
-       public Boolean setName(string name, out string message)
+       public Boolean SetName(string name, out string message)
         {
             if(name.Length == 0)
             {
@@ -39,7 +39,7 @@ namespace Task1
         }
 
         //------------------Descrption-----------------//
-        public Boolean setDescription(string description , out string message)
+        public Boolean SetDescription(string description , out string message)
         {
             if (description.Length > 500)
             {
@@ -53,7 +53,7 @@ namespace Task1
 
 
 
-        public string getDescripton()
+        public string GetDescripton()
         {
             return this.Description;
         }
@@ -61,7 +61,7 @@ namespace Task1
 
 
         //--------------------Price---------------------//
-        public Boolean setPrice(decimal Price, out string message)
+        public Boolean SetPrice(decimal Price, out string message)
         {
             if (Price <= 0)
             {
@@ -79,7 +79,7 @@ namespace Task1
         }
 
         //--------------------Quantity------------------//
-        public Boolean setQuantity(int Quantity, out string message)
+        public Boolean SetQuantity(int Quantity, out string message)
         {
             if (Quantity < 0)
             {
@@ -90,8 +90,8 @@ namespace Task1
             message = "Quantity is valid.";
             return true;
         }
-
-        public int? getQuantity()
+        
+        public int? GetQuantity()
         {
             return this.Quantitiy;
         }
