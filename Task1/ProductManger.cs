@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,31 +19,51 @@ namespace Task1
         }
         public string addProduct(string ProductCode, string name, string Description, decimal Price, int Quantity)
         {
-            Boolean checkCode = CheckCode(ProductCode);
-            if (!checkCode)
+           
+            if (!CheckCode(ProductCode,out string ProductMessage))
             {
-                Console.WriteLine("Error: Product code "+ProductCode);
+                return ProductMessage;
             }
-            newProduct = new Product(id, ProductCode, name);
-            if (!newProduct.setDescription(Description)) { return ERROR("description"); }
-            if (!newProduct.setPrice(Price)) { return ERROR("Price"); }
-            if (!newProduct.setQuantity(Quantity)) { return ERROR("Quantity"); }
+            newProduct = new Product(id, ProductCode);
+
+            if (!newProduct.setName(name, out string NameMessage))
+            {
+                return NameMessage;
+            }
+
+            if (!newProduct.setDescription(Description, out string DescrptionMessage))
+            {
+                return DescrptionMessage;
+            }
+
+            if (!newProduct.setPrice(Price, out string priceMessage))
+            {
+                return priceMessage;
+            }
+
+            if (!newProduct.setQuantity(Quantity, out string quantityMessage))
+            {
+                return quantityMessage;
+            }
             id++;
             products.Add(newProduct);
-            return "Seccesful to add Product";
+            return "Product added successfully.";
         }
 
-        public Boolean CheckCode(string ProductCode)
+        public Boolean CheckCode(string ProductCode ,out string message)
         {
             foreach (Product product in products)
             {
                 if (product.ProductCode == ProductCode)
                 {
+                    message = "Product code is already in use.";
                     return false;
                 }
             }
+            message = "product is valid";
             return true;
         }
+
 
         //-----------------------EEROR-------------------//
         private string ERROR(string error)

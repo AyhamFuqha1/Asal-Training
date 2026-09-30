@@ -19,25 +19,39 @@ namespace Task1
 
 
         //-------------------Product------------------//
-        public Product(int id, string ProductCode, string name)
+        public Product(int id, string ProductCode)
         {
             this.ID = id;
             this.ProductCode = ProductCode;
-            this.Name = name;
+          
         }
 
-
+       public Boolean setName(string name, out string message)
+        {
+            if(name.Length == 0)
+            {
+                message="Name is requird";
+                return false;
+            }
+            message = "Name is Valid";
+            return true;
+        }
 
         //------------------Descrption-----------------//
-        public Boolean setDescription(string description)
+        public Boolean setDescription(string description , out string message)
         {
             if (description.Length > 500)
             {
+                message = "Description must not exceed 500 characters.";
                 return false;
             }
             this.Description = description;
+            message = "Description is valid.";
             return true;
         }
+
+
+
         public string getDescripton()
         {
             return this.Description;
@@ -46,12 +60,14 @@ namespace Task1
 
 
         //--------------------Price---------------------//
-        public Boolean setPrice(decimal Price)
+        public Boolean setPrice(decimal Price, out string message)
         {
             if (Price <= 0)
             {
+                message = "Price must be greater than 0.";
                 return false;
             }
+            message = "price is valid";
             this.Price = Price;
             return true;
         }
@@ -62,13 +78,15 @@ namespace Task1
         }
 
         //--------------------Quantity------------------//
-        public Boolean setQuantity(int Quantity)
+        public Boolean setQuantity(int Quantity, out string message)
         {
             if (Quantity < 0)
             {
+                message = "Quantity must be greater than or equal to 0.";
                 return false;
             }
             this.Quantitiy = Quantity;
+            message = "Quantity is valid.";
             return true;
         }
 
