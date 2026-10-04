@@ -9,93 +9,75 @@ namespace Task1
 {
     internal class ProductManger
     {
-        private List<Product> Products;
+        private List<Product> Products { get; set; }
         private int ID;
-        private Product NewProduct;
         public ProductManger()
         {
             Products = new List<Product>();
             ID = 0;
         }
-        public string addProduct(string ProductCode, string name, string Description, decimal Price, int Quantity)
+        public string AddProduct(string productCode, string name, string description, decimal price, int quantity)
         {
-           
-            if (!CheckCode(ProductCode,out string ProductMessage))
-            {
-                return ProductMessage;
-            }
-            NewProduct = new Product(ID, ProductCode);
 
-            if (!NewProduct.SetName(name, out string NameMessage))
+            if (!ProductValidator.ValidateCode(productCode, out string codeMessage))
             {
-                return NameMessage;
+                return codeMessage;
             }
 
-            if (!NewProduct.SetDescription(Description, out string DescrptionMessage))
+
+            if (!CheckCode(productCode,out string productMessage))
             {
-                return DescrptionMessage;
+                return productMessage;
             }
 
-            if (!NewProduct.SetPrice(Price, out string priceMessage))
+
+            if (!ProductValidator.ValidateName(name, out string nameMessage))
+            {
+                return nameMessage;
+            }
+
+            if (!ProductValidator.ValidateDescription(description, out string descriptionMessage))
+            {
+                return descriptionMessage;
+            }
+
+            if (!ProductValidator.ValidatePrice(price, out string priceMessage))
             {
                 return priceMessage;
             }
 
-            if (!NewProduct.SetQuantity(Quantity, out string quantityMessage))
+            if (!ProductValidator.ValidateQuantity(quantity, out string quantityMessage))
             {
                 return quantityMessage;
             }
+
+            Product NewProduct = new Product(ID, productCode,name,description,price,quantity);
             ID++;
             Products.Add(NewProduct);
             return "Product added successfully.";
         }
 
-        public Boolean CheckCode(string ProductCode ,out string message)
+        public bool CheckCode(string productCode ,out string message)
         {
-            if(ProductCode.Length == 0)
-            {
-                message = "ProductCode is Reqired";
-            }
             foreach (Product product in Products)
             {
-                if (product.ProductCode == ProductCode)
+                if (product.ProductCode == productCode)
                 {
                     message = "Product code is already in use.";
                     return false;
                 }
             }
-            message = "product is valProducts";
+            message = "Product code is valid.";
             return true;
         }
 
-
-        //-----------------------EEROR-------------------//
-        private string ERROR(string error)
-        {
-            return "Value in " + error + " not valProducts";
+        public IReadOnlyList<Product> GetProducts() { 
+          return Products;
         }
 
-        public void ShowProducts()
-        {
-            Console.WriteLine("--------------------------------------------------------------------------------");
-            Console.WriteLine($"{"Products",-5} {"Code",-12} {"Name",-20} {"Description",-20} {"Price",-10} {"Qty",-5}");
-            Console.WriteLine("--------------------------------------------------------------------------------");
 
-            foreach (Product product in Products)
-            {
-                Console.WriteLine(
-                    $"{product.ID,-5} " +
-                    $"{product.ProductCode,-12} " +
-                    $"{product.Name,-20} " +
-                    $"{product.Description,-20} " +
-                    $"{product.Price,-10} " +
-                    $"{product.Quantitiy,-5}"
-                );
-            }
-
-            Console.WriteLine("--------------------------------------------------------------------------------");
-        }
-
+   
+   
 
     }
 }

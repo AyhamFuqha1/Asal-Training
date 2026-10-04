@@ -7,97 +7,32 @@ using System.Threading.Tasks;
 namespace Task1
 {
 
+
     internal class Product
     {
-        public int ID { get; set; }
-        public  string ProductCode { get; set; }
-        public string Name { get; set; }
-        public string? Description;
-        public decimal? Price;
-        public int? Quantitiy;
+        public int Id { get; private set; }
+        public string ProductCode { get; private set; }
+        public string Name { get; private set; }
+        public string? Description { get; private set; }
+        public decimal Price { get; private set; }
+        public int Quantity { get; private set; }
 
-
-
-        //-------------------Product------------------//
-        public Product(int id, string ProductCode)
+        public Product(
+            int id,
+            string productCode,
+            string name,
+            string? description,
+            decimal price,
+            int quantity)
         {
-            this.ID = id;
-            this.ProductCode = ProductCode;
-          
+            Id = id;
+            ProductCode = productCode;
+            Name = name;
+            Description = description;
+            Price = price;
+            Quantity = quantity;
         }
-
-       public Boolean SetName(string name, out string message)
-        {
-            if(name.Length == 0)
-            {
-                message="Name is requird";
-                return false;
-            }
-            this.Name = name;
-            message = "Name is Valid";
-            return true;
-        }
-
-        //------------------Descrption-----------------//
-        public Boolean SetDescription(string description , out string message)
-        {
-            if (description.Length > 500)
-            {
-                message = "Description must not exceed 500 characters.";
-                return false;
-            }
-            this.Description = description;
-            message = "Description is valid.";
-            return true;
-        }
-
-
-
-        public string GetDescripton()
-        {
-            return this.Description;
-        }
-
-
-
-        //--------------------Price---------------------//
-        public Boolean SetPrice(decimal Price, out string message)
-        {
-            if (Price <= 0)
-            {
-                message = "Price must be greater than 0.";
-                return false;
-            }
-            message = "price is valid";
-            this.Price = Price;
-            return true;
-        }
-
-        public decimal? getPrice()
-        {
-            return this.Price;
-        }
-
-        //--------------------Quantity------------------//
-        public Boolean SetQuantity(int Quantity, out string message)
-        {
-            if (Quantity < 0)
-            {
-                message = "Quantity must be greater than or equal to 0.";
-                return false;
-            }
-            this.Quantitiy = Quantity;
-            message = "Quantity is valid.";
-            return true;
-        }
-        
-        public int? GetQuantity()
-        {
-            return this.Quantitiy;
-        }
-
-
-
-
     }
 }
+
+
