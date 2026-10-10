@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task1.Models;
+using Task1.Readers.Interfaces;
 
-namespace Task1
+namespace Task1.Readers
 {
-    internal class ProductFileReader
+    internal class CsvProductReader : IProductReader
     {
-        public static void ReadProducts(string filePath,ProductManger productManger)
+        public List<Product> Read()
         {
-           
 
-            string[] lines = File.ReadAllLines(filePath);
+            List<Product> products = new List<Product>();
+            string[] lines = File.ReadAllLines(
+      "C:\\Users\\DELL\\source\\repos\\Task1\\Task1\\product.csv"
+  );
             for (int i = 1; i < lines.Length; i++)
             {
                 string[] data = lines[i].Split(',');
@@ -22,11 +26,9 @@ namespace Task1
                 string description = data[2];
                 decimal price = decimal.Parse(data[3]);
                 int quantity = int.Parse(data[4]);
-
-                string message=productManger.AddProduct(code, name, description, price, quantity);
-                Console.WriteLine(message);
-                
+                products.Add(new Product(0, code, name, description, price, quantity));
             }
+            return products;
 
         }
     }

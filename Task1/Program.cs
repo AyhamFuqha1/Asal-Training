@@ -1,43 +1,69 @@
-﻿using Task1;
-
-ProductManger productManager = new ProductManger();
-
-var productsExample = new[]
-{
-    ("ARC001", "Shampoo", "Hair shampoo 500ml", 12.50m, 5),
-    ("ARC001", "Soap", "Hand soap", 3.75m, 20),
-    ("ARC003", "", "Mint toothpaste", 4.25m, 15),
-    ("ARC004", "Perfume", "Men perfume 100ml", 25.00m, -1),
-    ("ARC005", "Body Lotion", "Moisturizing", 9.99m, 12)
-};
+﻿using Task1.Application.Validation;
+using Task1.Factories;
+using Task1.Repositories;
+using Task1.Services;
 
 
-Console.WriteLine("1. Local\n2. CSV\n");
+ProductRepository productRepository = new ProductRepository();
+ProductValidator productValidator = new ProductValidator();
+
+ProductReaderFactory productReaderFactory = new ProductReaderFactory();
+ProductWriterFactory productWriterFactory = new ProductWriterFactory();
+
+
+
+ProductService productService = new ProductService(
+    productRepository,
+    productValidator,
+    productReaderFactory,
+    productWriterFactory
+);
+
+Console.WriteLine("Choose Reader:");
+Console.WriteLine("1. Console");
+Console.WriteLine("2. CSV");
 
 int answer = int.Parse(Console.ReadLine());
 
+string readerType;
+
 if (answer == 1)
 {
-    for (int i = 0; i < productsExample.Length; i++)
-    {
-        string message = productManager.AddProduct(
-            productsExample[i].Item1,
-            productsExample[i].Item2,
-            productsExample[i].Item3,
-            productsExample[i].Item4,
-            productsExample[i].Item5
-        );
-
-        Console.WriteLine(message);
-    }
+    readerType = "console";
 }
 else
 {
-
-    ProductFileReader.ReadProducts(
-     "C:\\Users\\DELL\\source\\repos\\Task1\\Task1\\product.csv",
-     productManager
-     );
+    readerType = "csv";
 }
 
-ProductPrinter.ShowProducts(productManager.GetProducts());
+
+
+var results = productService.AddProduct(readerType);
+
+
+foreach (var result in results)
+{
+    Console.WriteLine(result.Message);
+}
+
+
+
+Console.WriteLine("\nChoose Writer:");
+Console.WriteLine("1. Console");
+Console.WriteLine("2. CSV");
+
+int writerAnswer = int.Parse(Console.ReadLine());
+
+string writerType;
+
+if (writerAnswer == 1)
+{
+    writerType = "console";
+}
+else
+{
+    writerType = "csv";
+}
+
+
+productService.ShowProducts(writerType);

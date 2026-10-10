@@ -4,13 +4,37 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Task1.Models;
+using Task1.Validation.Interfaces;
 
-namespace Task1
+namespace Task1.Application.Validation
 {
-    internal static class ProductValidator
+    internal class ProductValidator : IProductValidator
     {
 
-        public static bool ValidateCode (string code, out string message)
+        public bool Validate(Product product, out string message)
+        {
+            if (!ValidateCode(product.ProductCode, out message))
+                return false;
+
+            if (!ValidateName(product.Name, out message))
+                return false;
+
+            if (!ValidateDescription(product.Description, out message))
+                return false;
+
+            if (!ValidatePrice(product.Price, out message))
+                return false;
+
+            if (!ValidateQuantity(product.Quantity, out message))
+                return false;
+
+            
+            message = "Product is valid.";
+            return true;
+        }
+
+        public bool ValidateCode(string code, out string message)
         {
             if (string.IsNullOrWhiteSpace(code))
             {
@@ -22,7 +46,7 @@ namespace Task1
 
         }
 
-        public static bool ValidateName(string name, out string message)
+        public bool ValidateName(string name, out string message)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -33,7 +57,7 @@ namespace Task1
             return true;
 
         }
-        public static bool ValidateDescription(string description, out string message)
+        public bool ValidateDescription(string description, out string message)
         {
             if (description != null && description.Length > 500)
             {
@@ -44,7 +68,7 @@ namespace Task1
             return true;
 
         }
-        public static bool ValidatePrice(decimal price, out string message)
+        public bool ValidatePrice(decimal price, out string message)
         {
             if (price <= 0)
             {
@@ -55,7 +79,7 @@ namespace Task1
             return true;
 
         }
-        public static bool ValidateQuantity(int quantity, out string message)
+        public bool ValidateQuantity(int quantity, out string message)
         {
             if (quantity < 0)
             {

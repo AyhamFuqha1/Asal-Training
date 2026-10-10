@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task1
+namespace Task1.Models
 {
 
 
@@ -31,6 +31,10 @@ namespace Task1
             Description = description;
             Price = price;
             Quantity = quantity;
+        }
+        public void SetId(int id)
+        {
+            Id = id;
         }
     }
 }
